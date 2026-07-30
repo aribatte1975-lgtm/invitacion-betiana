@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Mis 50 Años · Betiana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Jost:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0e0b0f;
+    --bg-alt: #17121a;
+    --gold: #c9a24b;
+    --gold-light: #e8cd8a;
+    --gold-deep: #8a6b2e;
+    --blue: #4c7eaa;
+    --blue-light: #9cc3e0;
+    --cream: #f3ecdd;
+    --cream-dim: rgba(243,236,221,0.62);
+    --wine: #3a1620;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height:100vh;
+    overflow-x:hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Layered background: base tone + floral pattern + aurora glow + sparkle dust ---------- */
+  #bg-base{
+    position: fixed; inset:0; z-index:0;
+    background: radial-gradient(ellipse at 20% 10%, #241c2c 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 90%, #1c2b3a 0%, transparent 55%),
+                radial-gradient(ellipse at top, #1a1420 0%, var(--bg) 55%, #08060a 100%);
+  }
+  #bg-floral{
+    position: fixed; inset:0; z-index:1;
+    opacity: 0.55;
+    mix-blend-mode: screen;
+    animation: floralDrift 60s ease-in-out infinite;
+  }
+  @keyframes floralDrift{
+    0%,100%{ transform: translate(0,0) scale(1); }
+    50%{ transform: translate(-1.5%, -1%) scale(1.03); }
+  }
+  .aurora{
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(70px);
+    z-index: 1;
+    pointer-events:none;
+    opacity: 0.5;
+  }
+  .aurora.a1{
+    width: 46vw; height: 46vw;
+    top: -10%; left: -12%;
+    background: radial-gradient(circle, rgba(76,126,170,0.35), transparent 70%);
+    animation: auroraFloat1 22s ease-in-out infinite;
+  }
+  .aurora.a2{
+    width: 40vw; height: 40vw;
+    bottom: -12%; right: -10%;
+    background: radial-gradient(circle, rgba(201,162,75,0.22), transparent 70%);
+    animation: auroraFloat2 26s ease-in-out infinite;
+  }
+  .aurora.a3{
+    width: 30vw; height: 30vw;
+    top: 40%; left: 60%;
+    background: radial-gradient(circle, rgba(76,126,170,0.18), transparent 70%);
+    animation: auroraFloat1 30s ease-in-out infinite reverse;
+  }
+  @keyframes auroraFloat1{
+    0%,100%{ transform: translate(0,0); }
+    50%{ transform: translate(4%, 6%); }
+  }
+  @keyframes auroraFloat2{
+    0%,100%{ transform: translate(0,0); }
+    50%{ transform: translate(-5%, -5%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    #bg-floral, .aurora{ animation: none !important; }
+  }
+
+  h1,h2,.display{
+    font-family: 'Cinzel', serif;
+  }
+
+  a{color:inherit;}
+
+  ::selection{ background: var(--gold); color:#141014; }
+
+  /* ---------- Ambient butterflies ---------- */
+  #butterflies-ambient{
+    position: fixed;
+    inset: 0;
+    pointer-events:none;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 1.6s ease 0.3s;
+  }
+  #butterflies-ambient.released{ opacity:1; }
+
+  .butterfly{
+    position:absolute;
+    width: 60px;
+    height: 48px;
+    animation: fly linear infinite;
+    filter: drop-shadow(0 4px 10px rgba(76,126,170,0.4));
+  }
+  .butterfly svg{
+    width:100%; height:100%;
+    display:block;
+    overflow: visible;
+  }
+  .wing-left, .wing-right{
+    transform-origin: 60px 50px;
+    animation: flapL .42s ease-in-out infinite alternate;
+  }
+  .wing-right{ animation-name: flapR; }
+
+  @keyframes flapL{
+    from{ transform: scaleX(1) rotate(0deg); }
+    to{ transform: scaleX(0.28) rotate(-6deg); }
+  }
+  @keyframes flapR{
+    from{ transform: scaleX(1) rotate(0deg); }
+    to{ transform: scaleX(0.28) rotate(6deg); }
+  }
+
+  @keyframes fly{
+    0%   { transform: translate(0,0) rotate(0deg) scale(1); }
+    20%  { transform: translate(var(--p1x), var(--p1y)) rotate(var(--r1)) scale(1.05); }
+    45%  { transform: translate(var(--p2x), var(--p2y)) rotate(var(--r2)) scale(0.92); }
+    70%  { transform: translate(var(--p3x), var(--p3y)) rotate(var(--r3)) scale(1.08); }
+    100% { transform: translate(0,0) rotate(0deg) scale(1); }
+  }
+
+  @keyframes burstFly{
+    0%   { transform: translate(0,0) scale(0.3) rotate(0deg); opacity: 0; }
+    12%  { opacity: 1; }
+    100% { transform: translate(var(--bx), var(--by)) scale(var(--bs)) rotate(var(--br)); opacity: 0.92; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .butterfly, .wing-left, .wing-right{ animation: none !important; }
+  }
+
+  /* ---------- Gate / Envelope ---------- */
+  #gate{
+    position: fixed; inset:0;
+    z-index: 50;
+    display:flex; align-items:center; justify-content:center;
+    background: radial-gradient(ellipse at center, #1c1620 0%, #0a0810 75%);
+    transition: opacity 0.9s ease 0.5s, visibility 0.9s ease 0.5s;
+  }
+  #gate.open{ opacity:0; visibility:hidden; }
+
+  .envelope-wrap{
+    perspective: 1200px;
+    display:flex; flex-direction:column; align-items:center; gap: 28px;
+    padding: 20px;
+  }
+
+  .envelope{
+    position:relative;
+    width: 220px;
+    height: 150px;
+    background: linear-gradient(160deg, #241a24, #150f18);
+    border: 1px solid var(--gold-deep);
+    border-radius: 4px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,162,75,0.08);
+  }
+
+  .envelope::before, .envelope::after{
+    content:"";
+    position:absolute;
+    bottom:0; width:0; height:0;
+    border-style: solid;
+  }
+  .envelope::before{
+    left:0;
+    border-width: 0 0 78px 110px;
+    border-color: transparent transparent rgba(201,162,75,0.08) transparent;
+  }
+  .envelope::after{
+    right:0;
+    border-width: 78px 110px 0 0;
+    border-color: transparent transparent transparent rgba(201,162,75,0.08);
+  }
+
+  .flap{
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:0;
+    border-style: solid;
+    border-width: 78px 110px 0 110px;
+    border-color: var(--gold-deep) transparent transparent transparent;
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    transition: transform 1s cubic-bezier(.6,.2,.2,1);
+    z-index: 3;
+  }
+  #gate.open .flap{ transform: rotateX(160deg); }
+
+  .seal{
+    position:absolute;
+    top: 58px; left:50%;
+    width: 46px; height:46px;
+    margin-left: -23px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold) 55%, var(--gold-deep) 100%);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Cinzel', serif;
+    font-size: 20px;
+    color: #2a1c10;
+    z-index:4;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.5);
+    transition: opacity 0.5s ease;
+  }
+  #gate.open .seal{ opacity:0; }
+
+  .envelope-text{
+    text-align:center;
+  }
+  .envelope-eyebrow{
+    letter-spacing: 0.32em;
+    font-size: 11px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom:6px;
+  }
+  .envelope-title{
+    font-size: clamp(22px, 5vw, 30px);
+    color: var(--cream);
+    letter-spacing: 0.04em;
+  }
+
+  .open-btn{
+    font-family:'Jost', sans-serif;
+    font-weight:400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: #1a130c;
+    background: linear-gradient(160deg, var(--gold-light), var(--gold));
+    border:none;
+    padding: 14px 34px;
+    border-radius: 999px;
+    cursor:pointer;
+    box-shadow: 0 10px 30px rgba(201,162,75,0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .open-btn:hover{ transform: translateY(-2px); box-shadow: 0 14px 36px rgba(201,162,75,0.35); }
+  .open-btn:focus-visible{ outline: 2px solid var(--blue-light); outline-offset:3px; }
+
+  /* ---------- Content ---------- */
+  main{
+    position:relative;
+    z-index: 2;
+    opacity:0;
+    transition: opacity 1.2s ease;
+  }
+  main.visible{ opacity:1; }
+
+  section{
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 110px 28px;
+    text-align:center;
+    position:relative;
+  }
+
+  .reveal{
+    opacity:0;
+    transform: translateY(28px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.in{ opacity:1; transform:none; }
+
+  /* divider */
+  .divider{
+    display:flex; align-items:center; justify-content:center; gap: 14px;
+    margin: 36px auto;
+    width: 220px;
+  }
+  .divider .line{ flex:1; height:1px; background: linear-gradient(90deg, transparent, var(--gold-deep), transparent); }
+  .divider .diamond{ width:7px; height:7px; background: var(--gold); transform: rotate(45deg); }
+
+  /* Hero */
+  .hero{ padding-top: 90px; }
+  .hero .eyebrow{
+    letter-spacing: 0.4em;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 22px;
+  }
+  .hero h1{
+    font-size: clamp(30px, 6vw, 44px);
+    font-weight: 400;
+    color: var(--cream);
+    letter-spacing: 0.03em;
+  }
+  .hero .name{
+    display:block;
+    font-size: clamp(64px, 15vw, 120px);
+    font-weight: 700;
+    line-height: 1.05;
+    margin: 14px 0 6px;
+    background: linear-gradient(100deg, var(--gold-deep) 0%, var(--gold-light) 30%, var(--gold) 45%, var(--gold-light) 60%, var(--gold-deep) 100%);
+    background-size: 260% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 6s ease-in-out infinite;
+  }
+  @keyframes shimmer{
+    0%{ background-position: 0% 50%; }
+    50%{ background-position: 100% 50%; }
+    100%{ background-position: 0% 50%; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero .name{ animation: none; }
+  }
+  .hero .subtitle{
+    max-width: 480px;
+    margin: 26px auto 0;
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--cream-dim);
+  }
+  .scroll-cue{
+    margin-top: 60px;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    animation: bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(8px);} }
+
+  /* Details / ticket card */
+  .details h2, .countdown h2, .rsvp h2{
+    font-size: clamp(24px, 4vw, 30px);
+    font-weight: 400;
+    color: var(--cream);
+    letter-spacing: 0.02em;
+  }
+
+  .ticket{
+    margin-top: 46px;
+    border: 1px solid var(--gold-deep);
+    border-radius: 18px;
+    background: linear-gradient(160deg, rgba(201,162,75,0.06), rgba(76,126,170,0.04));
+    padding: 40px 30px;
+    position:relative;
+    overflow:hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+  .ticket:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(76,126,170,0.18), 0 0 0 1px rgba(201,162,75,0.2);
+    border-color: var(--gold);
+  }
+  .ticket::before{
+    content:"";
+    position:absolute; inset:8px;
+    border: 1px solid rgba(201,162,75,0.25);
+    border-radius: 12px;
+    pointer-events:none;
+  }
+  .detail-row{
+    display:flex; align-items:center; justify-content:center; gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(201,162,75,0.14);
+  }
+  .detail-row:last-of-type{ border-bottom:none; }
+  .detail-icon{ font-size: 20px; color: var(--blue-light); width: 26px; }
+  .detail-text .label{
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 4px;
+  }
+  .detail-text .value{
+    font-size: 18px;
+    color: var(--cream);
+  }
+  .map-btn{
+    display:inline-block;
+    margin-top: 28px;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration:none;
+    color: var(--gold-light);
+    border: 1px solid var(--gold-deep);
+    padding: 12px 26px;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+  }
+  .map-btn:hover{ background: rgba(201,162,75,0.1); color: var(--gold-light); }
+
+  /* Countdown */
+  .countdown-grid{
+    display:flex; justify-content:center; gap: 14px;
+    margin-top: 42px;
+    flex-wrap: wrap;
+  }
+  .cd-box{
+    width: 84px;
+    padding: 18px 0;
+    border: 1px solid var(--gold-deep);
+    border-radius: 12px;
+    background: rgba(201,162,75,0.05);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .cd-box:hover{
+    transform: translateY(-3px);
+    border-color: var(--gold);
+  }
+  .cd-box .num{
+    font-family:'Cinzel', serif;
+    font-size: 30px;
+    color: var(--gold-light);
+    display:block;
+  }
+  .cd-box .lab{
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    margin-top: 6px;
+    display:block;
+  }
+
+  /* RSVP */
+  .rsvp form{
+    margin-top: 40px;
+    text-align:left;
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .field label{
+    display:block;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+  .field input[type="text"], .field input[type="number"], .field textarea{
+    width:100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,162,75,0.3);
+    border-radius: 8px;
+    padding: 13px 14px;
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+  }
+  .field input:focus, .field textarea:focus{
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,162,75,0.12);
+  }
+  .field textarea{ min-height: 90px; resize: vertical; }
+
+  .toggle-group{ display:flex; gap: 12px; }
+  .toggle-group input{ display:none; }
+  .toggle-group label{
+    flex:1;
+    text-align:center;
+    padding: 13px 10px;
+    border: 1px solid rgba(201,162,75,0.3);
+    border-radius: 999px;
+    cursor:pointer;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--cream-dim);
+    transition: all 0.25s ease;
+    text-transform:none;
+  }
+  .toggle-group input:checked + label{
+    background: linear-gradient(160deg, var(--gold-light), var(--gold));
+    color: #1a130c;
+    border-color: transparent;
+  }
+
+  #companions-field{
+    max-height:0;
+    opacity:0;
+    overflow:hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+  }
+  #companions-field.show{ max-height:120px; opacity:1; }
+
+  .submit-btn{
+    margin-top: 6px;
+    font-family:'Jost', sans-serif;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: #1a130c;
+    background: linear-gradient(160deg, var(--gold-light), var(--gold));
+    border:none;
+    padding: 15px;
+    border-radius: 999px;
+    cursor:pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .submit-btn:hover{ transform: translateY(-2px); box-shadow: 0 12px 30px rgba(201,162,75,0.3); }
+
+  .rsvp-note{
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--cream-dim);
+    text-align:center;
+  }
+
+  .thanks{
+    display:none;
+    margin-top: 30px;
+    padding: 26px;
+    border: 1px solid var(--gold-deep);
+    border-radius: 14px;
+    background: rgba(76,126,170,0.06);
+  }
+  .thanks.show{ display:block; }
+  .thanks p{ color: var(--cream); font-size: 16px; }
+
+  footer{
+    text-align:center;
+    padding: 70px 28px 90px;
+    color: var(--cream-dim);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+  }
+  footer .fbutterfly{
+    width: 30px; height: 24px;
+    margin: 0 auto 14px;
+    color: var(--blue-light);
+    animation: flap 3s ease-in-out infinite;
+  }
+
+  /* Music toggle */
+  #music-toggle{
+    position: fixed;
+    top: 18px; right: 18px;
+    z-index: 40;
+    width: 46px; height:46px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-deep);
+    background: rgba(14,11,15,0.7);
+    backdrop-filter: blur(6px);
+    color: var(--gold-light);
+    font-size: 18px;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition: all 0.3s ease;
+  }
+  #music-toggle:hover{ background: rgba(201,162,75,0.15); }
+  #music-toggle:focus-visible{ outline: 2px solid var(--blue-light); outline-offset:2px; }
+
+  @media (max-width: 480px){
+    section{ padding: 80px 20px; }
+    .cd-box{ width: 70px; padding: 14px 0; }
+    .cd-box .num{ font-size: 24px; }
+  }
+
+  /* ============================================================
+     NUEVO TEMA BLANCO + FLORES/MARIPOSAS DE LA TORTA
+     ============================================================ */
+  :root{
+    --bg: #ffffff;
+    --bg-alt: #faf7f2;
+    --blue: #2e5c8a;
+    --blue-light: #5b8fc7;
+    --ink: #1f1b2e;
+    --ink-muted: #5a5568;
+  }
+
+  body{ color: var(--ink); }
+  ::selection{ background: var(--gold); color: #fff; }
+
+  /* Marco dorado fino alrededor de toda la tarjeta */
+  .card-frame{
+    position: fixed; inset: 16px; z-index: 2;
+    border: 1px solid rgba(201,162,75,0.35);
+    border-radius: 14px;
+    pointer-events: none;
+    box-shadow: inset 0 0 40px rgba(201,162,75,0.04);
+  }
+  main{ position: relative; z-index: 3; }
+
+  /* Fondo suave, sin destellos */
+  #bg-base{
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(232,205,138,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 90%, rgba(91,143,199,0.10) 0%, transparent 55%),
+      var(--bg);
+  }
+  .aurora{ opacity: 0.22; }
+  .aurora.a1{ background: radial-gradient(circle, rgba(91,143,199,0.20), transparent 70%); }
+  .aurora.a2{ background: radial-gradient(circle, rgba(201,162,75,0.14), transparent 70%); }
+  .aurora.a3{ background: radial-gradient(circle, rgba(91,143,199,0.10), transparent 70%); }
+
+  /* Mariposas de la apertura */
+  .butterfly{ height: auto; }
+  .butterfly img{
+    width: 100%; height: auto; display: block;
+    transform-origin: center center;
+    filter: drop-shadow(0 3px 6px rgba(46,92,138,0.25));
+  }
+  @keyframes burstFlap{
+    from{ transform: scaleX(1) rotate(0deg); }
+    to{ transform: scaleX(0.72) rotate(5deg); }
+  }
+  @keyframes burstFly{
+    0%   { transform: translate(0, 0) scale(0.18) rotate(0deg); opacity: 0; }
+    8%   { opacity: 1; }
+    100% { transform: translate(var(--bx), var(--by)) scale(var(--bs)) rotate(var(--br)); opacity: 0.92; }
+  }
+
+  /* Sobre blanco grande con sello dorado real */
+  #gate{
+    background:
+      radial-gradient(ellipse at center, #ffffff 0%, #f7f4ef 55%, #ebe6de 100%);
+    transition: opacity 0.7s ease 4.7s, visibility 0.7s ease 4.7s;
+  }
+  .envelope-wrap{ gap: 38px; }
+  .envelope{
+    width: 300px; height: 200px;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(46,36,20,0.012) 2px, rgba(46,36,20,0.012) 4px),
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(46,36,20,0.012) 2px, rgba(46,36,20,0.012) 4px),
+      linear-gradient(160deg, #ffffff 0%, #f5f3ef 100%);
+    border: 1px solid var(--gold-deep);
+    border-radius: 8px;
+    box-shadow:
+      0 36px 100px rgba(31,27,46,0.22),
+      0 14px 34px rgba(31,27,46,0.12),
+      inset 0 18px 30px -18px rgba(46,36,20,0.10);
+  }
+  .envelope::before, .envelope::after{
+    content:"";
+    position:absolute;
+    bottom:0; width:0; height:0;
+    border-style: solid;
+  }
+  .envelope::before{
+    left:0;
+    border-width: 0 0 100px 150px;
+    border-color: transparent transparent rgba(201,162,75,0.06) transparent;
+  }
+  .envelope::after{
+    right:0;
+    border-width: 100px 150px 0 0;
+    border-color: transparent transparent transparent rgba(201,162,75,0.06) transparent;
+  }
+  .flap{
+    border-width: 100px 150px 0 150px;
+    border-color: #e8e0d4 transparent transparent transparent;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.08));
+    transition: transform 1.8s cubic-bezier(.45,.15,.25,1);
+  }
+  #gate.open .flap{ transform: rotateX(172deg); }
+  .seal{
+    top: 74px;
+    width: 84px; height: 84px;
+    margin-left: -42px;
+    background: none;
+    border-radius: 50%;
+    box-shadow:
+      0 10px 26px rgba(31,27,46,0.28),
+      0 4px 10px rgba(31,27,46,0.18);
+    display: block;
+  }
+  .seal img{ width:100%; height:100%; display:block; }
+  .envelope-front{
+    position: absolute; inset: 1px; z-index: 2;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(46,36,20,0.012) 2px, rgba(46,36,20,0.012) 4px),
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(46,36,20,0.012) 2px, rgba(46,36,20,0.012) 4px),
+      linear-gradient(160deg, #ffffff 0%, #f5f3ef 100%);
+    clip-path: polygon(0% 0%, 50% 50%, 100% 0%, 100% 100%, 0% 100%);
+    border: 1px solid rgba(201,162,75,0.28);
+    border-radius: 7px;
+    box-shadow: inset 0 0 30px rgba(201,162,75,0.05);
+    pointer-events: none;
+  }
+  .corner-ornament{
+    position: absolute; width: 22px; height: 22px; z-index: 2;
+    pointer-events: none;
+  }
+  .corner-ornament::before, .corner-ornament::after{
+    content: ""; position: absolute; background: var(--gold-deep);
+  }
+  .corner-ornament::before{ width: 16px; height: 1.5px; }
+  .corner-ornament::after{ width: 1.5px; height: 16px; }
+  .corner-ornament.tl{ top: 7px; left: 7px; }
+  .corner-ornament.tl::before{ top: 0; left: 0; }
+  .corner-ornament.tl::after{ top: 0; left: 0; }
+  .corner-ornament.tr{ top: 7px; right: 7px; }
+  .corner-ornament.tr::before{ top: 0; right: 0; }
+  .corner-ornament.tr::after{ top: 0; right: 0; }
+  .corner-ornament.bl{ bottom: 7px; left: 7px; }
+  .corner-ornament.bl::before{ bottom: 0; left: 0; }
+  .corner-ornament.bl::after{ bottom: 0; left: 0; }
+  .corner-ornament.br{ bottom: 7px; right: 7px; }
+  .corner-ornament.br::before{ bottom: 0; right: 0; }
+  .corner-ornament.br::after{ bottom: 0; right: 0; }
+  #burst-container{
+    position: absolute; inset: 1px; z-index: 4;
+    clip-path: polygon(evenodd, -50% -50%, 150% -50%, 150% 150%, -50% 150%, 0% 0%, 50% 50%, 100% 0%, 100% 100%, 0% 100%);
+    border-radius: 7px;
+    pointer-events: none;
+  }
+  .flap{ z-index: 3; }
+  .seal{ z-index: 5; }
+  .envelope-eyebrow{ color: var(--gold-deep); }
+  .envelope-title{ color: var(--ink); }
+
+  @media (max-width: 480px){
+    .envelope{ width: 260px; height: 174px; }
+    .envelope::before{ border-width: 0 0 87px 130px; }
+    .envelope::after{ border-width: 87px 130px 0 0; }
+    .flap{ border-width: 87px 130px 0 130px; }
+    .seal{ width: 68px; height:68px; margin-left:-34px; top:68px; }
+  }
+
+  /* Ramos de flores en las esquinas (sin fondo) */
+  .corner-flowers{
+    position: fixed; pointer-events: none; z-index: 1;
+    width: min(44vw, 540px);
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+  body.invitation-shown .corner-flowers{ opacity: 1; }
+  .corner-flowers img{ width:100%; height:auto; display:block; }
+  .corner-flowers.top-left{
+    top:-2vw; left:-2vw;
+    width: min(54vw, 660px);
+  }
+  .corner-flowers.bottom-right{ bottom:-2vw; right:-2vw; }
+
+  /* Empujar el contenido para que no se amontone con las flores */
+  section{ padding-left: min(11vw, 140px); padding-right: min(11vw, 140px); }
+
+  /* Mariposas posadas sobre las flores, aleteando */
+  .perched-butterfly{
+    position:absolute; width: clamp(58px, 8.5vw, 96px);
+    pointer-events:none;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+  }
+  .perched-butterfly img{
+    width:100%; height:auto; display:block;
+    transform-origin: center center;
+    animation: perchedFlap 2.4s ease-in-out infinite;
+  }
+  .perched-butterfly:nth-of-type(2) img{ animation-duration: 2.9s; animation-delay: 0.7s; }
+  .perched-butterfly:nth-of-type(3) img{ animation-duration: 2.1s; animation-delay: 1.3s; }
+  @keyframes perchedFlap{
+    0%,100%{ transform: scaleX(1) rotate(0deg) translateY(0); }
+    50%{ transform: scaleX(0.78) rotate(4deg) translateY(-2px); }
+  }
+
+  /* Mariposas fijas extras en la composición */
+  .card-butterfly{
+    position: fixed; pointer-events: none; z-index: 1;
+    width: clamp(64px, 10vw, 110px);
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+  body.invitation-shown .card-butterfly{ opacity: 1; }
+  .card-butterfly img{
+    width:100%; height:auto; display:block;
+    transform-origin: center center;
+    animation: perchedFlap 2.7s ease-in-out infinite;
+  }
+  .card-butterfly:nth-of-type(2) img{ animation-duration: 3.1s; animation-delay: 0.9s; }
+
+  /* Entrada animada de "Mis 50 años" */
+  .hero h1.reveal.in{ animation: titleEnter 1.1s cubic-bezier(.22,1,.36,1) 0.25s both; }
+  @keyframes titleEnter{
+    from{ opacity:0; transform: translateY(40px) scale(0.92); letter-spacing: 0.16em; }
+    to{ opacity:1; transform: none; letter-spacing: 0.03em; }
+  }
+
+  /* Textos adaptados al fondo blanco */
+  .hero h1,
+  .details h2, .countdown h2, .rsvp h2,
+  .detail-text .value,
+  .thanks p{ color: var(--ink); }
+
+  .hero .subtitle,
+  .scroll-cue,
+  .cd-box .lab,
+  .toggle-group label,
+  .rsvp-note,
+  footer{ color: var(--ink-muted); }
+
+  .hero .eyebrow,
+  .field label,
+  .detail-text .label,
+  .map-btn{ color: var(--gold-deep); }
+
+  .hero .name{ filter: drop-shadow(0 3px 10px rgba(201,162,75,0.28)); }
+
+  .ticket{ background: linear-gradient(160deg, rgba(201,162,75,0.08), rgba(46,92,138,0.05)); }
+  .map-btn:hover{ background: rgba(201,162,75,0.12); color: var(--gold-deep); }
+
+  .field input[type="text"],
+  .field input[type="number"],
+  .field textarea{ color: var(--ink); background: #fff; }
+
+  /* Botón de música */
+  #music-toggle{
+    background: rgba(255,255,255,0.92);
+    border-color: var(--gold-deep);
+    color: var(--gold-deep);
+    box-shadow: 0 4px 14px rgba(31,27,46,0.08);
+  }
+  #music-toggle:hover{ background: rgba(201,162,75,0.15); }
+
+  /* Mariposa del footer */
+  footer .fbutterfly{ width: 40px; height: auto; animation: perchedFlap 3.2s ease-in-out infinite; }
+
+  /* ============================================================
+     TOQUES PREMIUM EN LA TARJETA
+     ============================================================ */
+  body{
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(232,205,138,0.10) 0%, transparent 60%),
+      #faf8f5;
+  }
+
+  .hero{ padding-top: 78px; }
+  .hero .monogram{
+    width: 68px; height: 68px; margin: 0 auto 16px;
+    border: 1.5px solid var(--gold-deep); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif; font-size: 30px; color: var(--gold-deep);
+    box-shadow: 0 0 0 4px rgba(201,162,75,0.08), inset 0 0 12px rgba(201,162,75,0.08);
+  }
+  .hero .eyebrow{
+    letter-spacing: 0.45em;
+    font-size: 11px;
+    color: var(--gold-deep);
+    margin-bottom: 28px;
+  }
+  .hero .name{ filter: drop-shadow(0 4px 16px rgba(201,162,75,0.35)); }
+  .hero .subtitle{
+    border-top: 1px solid rgba(201,162,75,0.32);
+    border-bottom: 1px solid rgba(201,162,75,0.32);
+    padding: 22px 0;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .flourish{
+    width: 130px; height: 18px; margin: 18px auto;
+    color: var(--gold-deep); opacity: 0.65;
+    display: block;
+  }
+  .flourish path{ fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; }
+
+  .section-divider{
+    width: 120px; height: 1px;
+    margin: 0 auto 44px;
+    background: linear-gradient(90deg, transparent, var(--gold-deep), transparent);
+    position: relative;
+  }
+  .section-divider::after{
+    content: ""; position: absolute; top: -3px; left: 50%; margin-left: -3.5px;
+    width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg);
+  }
+
+  .ticket{
+    background: #fff;
+    box-shadow: 0 16px 50px rgba(31,27,46,0.08);
+    border-color: var(--gold-deep);
+  }
+  .ticket::before{ border-color: rgba(201,162,75,0.35); }
+  .detail-row{ padding: 18px 0; }
+  .detail-icon{ font-size: 22px; }
+
+  .cd-box{
+    background: #fff;
+    box-shadow: 0 8px 26px rgba(31,27,46,0.05);
+    border-color: var(--gold-deep);
+  }
+  .cd-box .num{
+    background: linear-gradient(100deg, var(--gold-deep), var(--gold), var(--gold-light), var(--gold), var(--gold-deep));
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 5s linear infinite;
+  }
+
+  .rsvp form{ margin-top: 46px; }
+  .submit-btn{ box-shadow: 0 10px 28px rgba(201,162,75,0.25); }
+
+  footer{ padding-top: 40px; }
+  .footer-line{
+    width: 90px; height: 1px; margin: 0 auto 24px;
+    background: linear-gradient(90deg, transparent, var(--gold-deep), transparent);
+    position: relative;
+  }
+  .footer-line::after{
+    content: ""; position: absolute; top: -3px; left: 50%; margin-left: -3.5px;
+    width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg);
+  }
+
+  @media (max-width: 640px){
+    .corner-flowers{ width: min(52vw, 280px); }
+    .corner-flowers.top-left{ width: min(60vw, 320px); top:-2vw; left:-4vw; }
+    .corner-flowers.bottom-right{ bottom:-5vw; right:-6vw; }
+    .perched-butterfly{ width: 46px; }
+    .card-butterfly{ width: 54px; }
+    section{ padding: 80px 22px; padding-left: 22px; padding-right: 22px; }
+    .hero{ padding-top: 70px; }
+    .hero .eyebrow{ font-size: 10px; letter-spacing: 0.35em; }
+    .hero .subtitle{ padding: 16px 0; }
+    .ticket{ padding: 28px 20px; }
+    .cd-box{ width: 70px; padding: 14px 0; }
+    .cd-box .num{ font-size: 26px; }
+    .map-btn, .submit-btn{ padding: 12px 22px; }
+    .card-frame{ inset: 8px; border-radius: 10px; }
+    .hero .monogram{ width: 54px; height: 54px; font-size: 24px; }
+    .flourish{ width: 100px; }
+    .section-divider{ width: 90px; margin-bottom: 36px; }
+    .footer-line{ width: 70px; }
+  }
+
+  @media (max-width: 380px){
+    .corner-flowers{ width: min(56vw, 240px); }
+    .corner-flowers.top-left{ width: min(64vw, 280px); }
+    .cd-box{ width: 64px; }
+    .cd-box .num{ font-size: 22px; }
+    .toggle-group label{ font-size: 11px; padding: 12px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hidden SVG defs reused by every butterfly instance -->
+
+
+<!-- Layered background -->
+<div id="bg-base"></div>
+<div class="aurora a1"></div>
+<div class="aurora a2"></div>
+<div class="aurora a3"></div>
+
+<!-- Fine gold frame around the whole card -->
+<div class="card-frame"></div>
+
+<!-- Gate / Envelope opening -->
+<div id="gate">
+  <div class="envelope-wrap">
+    <div class="envelope">
+      <div class="envelope-front"></div>
+      <div class="corner-ornament tl"></div>
+      <div class="corner-ornament tr"></div>
+      <div class="corner-ornament bl"></div>
+      <div class="corner-ornament br"></div>
+      <div id="burst-container"></div>
+      <div class="flap"></div>
+      <div class="seal"><img src="assets/sello_b.png" alt=""></div>
+    </div>
+    <div class="envelope-text">
+      <div class="envelope-eyebrow">Tenés una invitación</div>
+      <div class="envelope-title">Betiana te espera</div>
+    </div>
+    <button class="open-btn" id="open-btn">Abrir invitación</button>
+  </div>
+</div>
+
+<!-- Corner floral decorations -->
+<div class="corner-flowers top-left">
+  <img src="assets/flores_top_left.png" alt="">
+  <div class="perched-butterfly" style="top:34%; left:38%; transform: rotate(-15deg);">
+    <img src="assets/mariposa_azul.png" alt="">
+  </div>
+  <div class="perched-butterfly" style="top:58%; left:22%; transform: rotate(8deg); width: clamp(34px,5vw,56px);">
+    <img src="assets/mariposa_azul_2.png" alt="">
+  </div>
+</div>
+<div class="corner-flowers bottom-right">
+  <img src="assets/flores_bottom_right.png" alt="">
+  <div class="perched-butterfly" style="top:18%; right:30%; transform: rotate(20deg);">
+    <img src="assets/mariposa_azul_2.png" alt="">
+  </div>
+  <div class="perched-butterfly" style="top:42%; right:18%; transform: rotate(-10deg); width: clamp(34px,5vw,56px);">
+    <img src="assets/mariposa_azul.png" alt="">
+  </div>
+</div>
+
+<!-- Extra butterflies fixed in the composition -->
+<div class="card-butterfly" style="top:12%; right:8%; transform: rotate(15deg);">
+  <img src="assets/mariposa_azul.png" alt="">
+</div>
+<div class="card-butterfly" style="bottom:18%; left:10%; transform: rotate(-20deg);">
+  <img src="assets/mariposa_azul_2.png" alt="">
+</div>
+
+<button id="music-toggle" aria-label="Reproducir música" title="Música">♪</button>
+<audio id="bg-audio" loop preload="none">
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<main id="content">
+
+  <section class="hero">
+    <svg class="flourish" viewBox="0 0 130 18" aria-hidden="true"><path d="M0 9 Q32 0 65 9 T130 9"/></svg>
+    <div class="monogram reveal in">B</div>
+    <div class="eyebrow reveal in">Una celebración dorada</div>
+    <h1 class="reveal in">Mis 50 años</h1>
+    <span class="name reveal in">Betiana</span>
+    <p class="subtitle reveal in">Cincuenta años de vida, de historias y de alas que nunca dejaron de volar. Quiero festejarlo rodeada de las personas que más quiero — y vos sos una de ellas.</p>
+    <svg class="flourish" viewBox="0 0 130 18" aria-hidden="true"><path d="M0 9 Q32 18 65 9 T130 9"/></svg>
+    <div class="scroll-cue">Deslizá para ver los detalles</div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="details">
+    <div class="reveal">
+      <h2>Detalles de la fiesta</h2>
+      <div class="ticket">
+        <div class="detail-row">
+          <span class="detail-icon">✦</span>
+          <div class="detail-text">
+            <div class="label">Fecha</div>
+            <div class="value">Viernes 30 de octubre de 2026</div>
+          </div>
+        </div>
+        <div class="detail-row">
+          <span class="detail-icon">✦</span>
+          <div class="detail-text">
+            <div class="label">Hora</div>
+            <div class="value">21:00 hs</div>
+          </div>
+        </div>
+        <div class="detail-row">
+          <span class="detail-icon">✦</span>
+          <div class="detail-text">
+            <div class="label">Lugar</div>
+            <div class="value">Salón de Fiestas Santa Rita</div>
+          </div>
+        </div>
+        <a class="map-btn" id="map-link" href="#">Cómo llegar</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="countdown">
+    <div class="reveal">
+      <h2>Faltan</h2>
+      <div class="countdown-grid" id="countdown">
+        <div class="cd-box"><span class="num" id="cd-days">00</span><span class="lab">Días</span></div>
+        <div class="cd-box"><span class="num" id="cd-hours">00</span><span class="lab">Horas</span></div>
+        <div class="cd-box"><span class="num" id="cd-min">00</span><span class="lab">Min</span></div>
+        <div class="cd-box"><span class="num" id="cd-sec">00</span><span class="lab">Seg</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="rsvp">
+    <div class="reveal">
+      <h2>Confirmá tu asistencia</h2>
+      <p class="subtitle" style="margin-top:14px;">Betiana quiere saber si vas a estar ahí para brindar juntos. ¡No falta mucho!</p>
+
+      <form id="rsvp-form">
+        <div class="field">
+          <label for="rsvp-name">Tu nombre</label>
+          <input type="text" id="rsvp-name" name="name" required placeholder="¿Cómo te llamás?">
+        </div>
+
+        <div class="field">
+          <label>¿Vas a poder venir?</label>
+          <div class="toggle-group">
+            <input type="radio" id="rsvp-yes" name="attend" value="si" checked>
+            <label for="rsvp-yes">Sí, ahí estaré</label>
+            <input type="radio" id="rsvp-no" name="attend" value="no">
+            <label for="rsvp-no">No voy a poder</label>
+          </div>
+        </div>
+
+        <div class="field" id="companions-field">
+          <label for="rsvp-companions">Cantidad de acompañantes</label>
+          <input type="number" id="rsvp-companions" name="companions" min="0" max="10" value="0">
+        </div>
+
+        <div class="field">
+          <label for="rsvp-message">Mensaje para Betiana (opcional)</label>
+          <textarea id="rsvp-message" name="message" placeholder="Dejale un saludo..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Confirmar asistencia</button>
+        <p class="rsvp-note">Al confirmar serás redirigido/a a WhatsApp con tu respuesta lista para enviar a los organizadores.</p>
+      </form>
+
+      <div class="thanks" id="thanks-box">
+        <p id="thanks-text">¡Gracias! Tu confirmación está lista para enviarse.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-line"></div>
+  <footer>
+    <img class="fbutterfly" src="assets/mariposa_azul_2.png" alt="">
+    Con todo mi cariño, para vos
+  </footer>
+
+</main>
+
+<script>
+(function(){
+
+  /* ============================================================
+     CONFIGURACIÓN — editá estos valores según lo necesites
+     ============================================================ */
+  const WHATSAPP_NUMBER = "5492915042059";
+  const EVENT_MAP_URL = "https://maps.app.goo.gl/dJed6WsuVGtrnXmC8";
+  const COUNTDOWN_TARGET = new Date("2026-10-30T21:00:00");
+  const BUTTERFLY_IMAGES = ['assets/mariposa_azul.png', 'assets/mariposa_azul_2.png'];
+
+  /* ---------- Maps link ---------- */
+  document.getElementById('map-link').href = EVENT_MAP_URL;
+
+  /* ---------- Envelope open ---------- */
+  const gate = document.getElementById('gate');
+  const burstContainer = document.getElementById('burst-container');
+  const content = document.getElementById('content');
+  const bgAudio = document.getElementById('bg-audio');
+
+  document.getElementById('open-btn').addEventListener('click', function(){
+    gate.classList.add('open');
+    setTimeout(function(){ spawnBurst(30); }, 1800);
+    setTimeout(function(){
+      content.classList.add('visible');
+      document.body.classList.add('invitation-shown');
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+    }, 5400);
+
+    bgAudio.volume = 0.5;
+    bgAudio.play().catch(function(){ /* archivo no cargado aún */ });
+  });
+
+  function makeButterflyImg(idx){
+    const img = document.createElement('img');
+    img.src = BUTTERFLY_IMAGES[(idx || 0) % BUTTERFLY_IMAGES.length];
+    img.alt = '';
+    img.style.width = '100%';
+    img.style.height = 'auto';
+    img.style.display = 'block';
+    return img;
+  }
+
+  /* ---------- One butterfly emerging from inside the envelope ---------- */
+  function createButterfly(idx){
+    const el = document.createElement('div');
+    el.className = 'butterfly';
+    const img = makeButterflyImg(idx);
+    const wingSpeed = (0.18 + Math.random() * 0.14) + 's';
+    img.style.animation = 'burstFlap ' + wingSpeed + ' ease-in-out infinite alternate';
+    el.appendChild(img);
+
+    const size = 32 + Math.random() * 34;
+    const angle = Math.random() * Math.PI;
+    const dist = 170 + Math.random() * 190;
+    const bx = Math.cos(angle) * dist;
+    const by = -Math.sin(angle) * dist;
+
+    el.style.left = (105 + Math.random()*90) + 'px';
+    el.style.top = (95 + Math.random()*40) + 'px';
+    el.style.width = size + 'px';
+    el.style.height = 'auto';
+    el.style.marginLeft = (-size/2) + 'px';
+    el.style.marginTop = (-size*0.55) + 'px';
+    el.style.animation = 'burstFly ' + (1.05 + Math.random()*0.75) + 's cubic-bezier(.18,.72,.28,1) forwards';
+    el.style.animationDelay = (Math.random() * 0.4) + 's';
+    el.style.setProperty('--bx', bx + 'px');
+    el.style.setProperty('--by', by + 'px');
+    el.style.setProperty('--bs', (0.9 + Math.random()*0.55).toFixed(2));
+    el.style.setProperty('--br', (Math.random() * 90 - 45) + 'deg');
+
+    burstContainer.appendChild(el);
+    el.addEventListener('animationend', function(){ el.remove(); }, { once:true });
+  }
+
+  /* ---------- Butterflies released in small progressive waves ---------- */
+  function spawnBurst(total){
+    const perWave = 5;
+    const waveDelay = 160;
+    const waves = Math.ceil(total/perWave);
+    for (let w = 0; w < waves; w++){
+      setTimeout(function(){
+        const remaining = total - w*perWave;
+        const count = Math.min(perWave, remaining);
+        for (let i = 0; i < count; i++){
+          createButterfly(w*perWave + i);
+        }
+      }, w*waveDelay);
+    }
+  }
+
+  /* ---------- Countdown ---------- */
+  function updateCountdown(){
+    const now = new Date();
+    let diff = COUNTDOWN_TARGET - now;
+    if (diff < 0) diff = 0;
+
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff / (1000*60*60)) % 24);
+    const mins = Math.floor((diff / (1000*60)) % 60);
+    const secs = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-min').textContent = String(mins).padStart(2,'0');
+    document.getElementById('cd-sec').textContent = String(secs).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ---------- RSVP toggle for companions ---------- */
+  const companionsField = document.getElementById('companions-field');
+  function syncCompanions(){
+    const attending = document.querySelector('input[name="attend"]:checked').value === 'si';
+    companionsField.classList.toggle('show', attending);
+  }
+  document.querySelectorAll('input[name="attend"]').forEach(function(r){
+    r.addEventListener('change', syncCompanions);
+  });
+  syncCompanions();
+
+  /* ---------- RSVP submit ---------- */
+  document.getElementById('rsvp-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('rsvp-name').value.trim();
+    const attending = document.querySelector('input[name="attend"]:checked').value === 'si';
+    const companions = document.getElementById('rsvp-companions').value || '0';
+    const message = document.getElementById('rsvp-message').value.trim();
+
+    let text = "¡Hola! Soy " + name + ".\n";
+    text += attending
+      ? "Confirmo que voy a estar en los 50 años de Betiana"
+      : "Lamentablemente no voy a poder ir a los 50 años de Betiana";
+    if (attending && Number(companions) > 0){
+      text += " y llevo " + companions + (Number(companions) === 1 ? " acompañante" : " acompañantes");
+    }
+    text += ".";
+    if (message){ text += "\n\nMensaje: " + message; }
+
+    const waUrl = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
+
+    document.getElementById('thanks-text').textContent =
+      attending
+        ? "¡Gracias, " + (name || "querido/a invitado/a") + "! Te esperamos para brindar juntos 🥂"
+        : "Gracias por avisar, " + (name || "") + ". ¡Te vamos a extrañar!";
+    document.getElementById('thanks-box').classList.add('show');
+
+    // Redirigimos en la misma pestaña para evitar bloqueadores de popups
+    setTimeout(function(){ window.location.href = waUrl; }, 500);
+  });
+
+  /* ---------- Music toggle ---------- */
+  const musicBtn = document.getElementById('music-toggle');
+  musicBtn.addEventListener('click', function(){
+    if (bgAudio.paused){
+      bgAudio.play().then(function(){
+        musicBtn.textContent = '❚❚';
+      }).catch(function(){
+        musicBtn.textContent = '♪';
+        alert('Agregá un archivo llamado "musica.mp3" junto a este HTML para habilitar la música de fondo.');
+      });
+    } else {
+      bgAudio.pause();
+      musicBtn.textContent = '♪';
+    }
+  });
+
+  /* ---------- Scroll reveal for sections opened after the gate ---------- */
+  const io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) entry.target.classList.add('in');
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+})();
+</script>
+
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a234c93abf6af9df',t:'MTc4NTQxODk0MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
